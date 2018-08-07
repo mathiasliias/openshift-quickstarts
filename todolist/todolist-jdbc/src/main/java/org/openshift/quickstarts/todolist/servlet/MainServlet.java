@@ -1,6 +1,8 @@
 package org.openshift.quickstarts.todolist.servlet;
 
+import org.apache.commons.mail.EmailException;
 import org.openshift.quickstarts.todolist.model.TodoEntry;
+import org.openshift.quickstarts.todolist.service.SmtpClient;
 import org.openshift.quickstarts.todolist.service.TodoListService;
 
 import javax.servlet.ServletException;
@@ -30,43 +32,28 @@ public class MainServlet extends HttpServlet {
         BufferedReader reader = new BufferedReader(new InputStreamReader(getServletContext().getResourceAsStream("/WEB-INF/index.html"), "UTF-8"));
         try {
             String line;
-            boolean insideLoop = false;
-            StringBuilder sb = new StringBuilder();
             while ((line = reader.readLine()) != null) {
-                if (line.trim().equals("<!-- begin repeat for each entry -->")) {
-                    insideLoop = true;
-                } else if (line.trim().equals("<!-- end repeat for each entry -->")) {
-                    insideLoop = false;
-                    String entryTemplate = sb.toString();
-                    for (TodoEntry entry : todoListService.getAllEntries()) {
-                        out.println(
-                                entryTemplate
-                                        .replace("{{ summary }}", escapeHtml(entry.getSummary()))
-                                        .replace("{{ description }}", escapeHtml(entry.getDescription()))
-                        );
-                    }
-                } else if (insideLoop) {
-                    sb.append(line).append("\n");
-                } else {
-                    out.println(line);
-                }
+            	out.println(line);
             }
         } finally {
             reader.close();
         }
     }
 
-    private String escapeHtml(String text) {
-        return text.replace("<", "&lt;");
-    }
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String summary = req.getParameter("summary");
-        String description = req.getParameter("description");
+        String email = req.getParameter("email");
+        String fullname = req.getParameter("fullname");
+        String message = req.getParameter("message");
 
-        todoListService.addEntry(new TodoEntry(summary, description));
-
-        resp.sendRedirect("index.html");
+        try {
+			SmtpClient.sendMessage(email, fullname, message);
+		} catch (EmailException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			resp.sendError(400);
+		}
+        resp.setStatus(200);
+        resp.flushBuffer();
     }
 }
