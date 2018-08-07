@@ -320,7 +320,7 @@ a:hover, a:active, a:focus {
     border-color: transparent;
 }
 
-@media(min-width:768px) {
+@media(min-width:767px) {
     .custom-navbar {
         padding: 12px 0;
         border-bottom: 0;
@@ -340,6 +340,10 @@ a:hover, a:active, a:focus {
     Home section              
 -----------------------------------------*/
 
+#home {
+  margin-top: 70px;
+}
+
 #home h1 {
   padding-bottom: 18px;
 }
@@ -356,7 +360,7 @@ a:hover, a:active, a:focus {
   background-size: cover;
   background-position: 50% 50%;
   width: 100%;
-  height: 100vh;
+  height: 130vh;
 }
 
 #home .home-thumb {
@@ -368,7 +372,7 @@ a:hover, a:active, a:focus {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  height: 100vh;
+  height: 130vh;
   padding: 0 45px 0 45px;
 }
 
@@ -388,7 +392,7 @@ a:hover, a:active, a:focus {
 }
 
 #contact .contact-img {
-  background: url('../images/cat-2.jpg') no-repeat;
+  background: url('../images/cat-1.jpg') no-repeat;
   min-height: 75vh;
 }
 

@@ -8,7 +8,7 @@
     $('.preloader').fadeOut(1000); // set duration in brackets    
   });
 
-    
+  //Google map
   function myMap() {
     var heinaX = {lat: 59.440288, lng: 24.721752};
       var mapOptions = {
