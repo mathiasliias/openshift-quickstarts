@@ -1,7 +1,5 @@
 package org.openshift.quickstarts.todolist.dao;
 
-import org.openshift.quickstarts.todolist.model.TodoEntry;
-
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NameNotFoundException;
@@ -70,7 +68,7 @@ public class JdbcTodoListDAO implements TodoListDAO {
     }
 
     @Override
-    public void save(TodoEntry entry) {
+    public void save(String entry) {
         try {
             Connection connection = getConnection();
             try {
@@ -78,8 +76,6 @@ public class JdbcTodoListDAO implements TodoListDAO {
                 PreparedStatement statement = connection.prepareStatement("INSERT INTO todo_entries (id, summary, description) VALUES (?, ?, ?)");
                 try {
                     statement.setLong(1, getNextId());
-                    statement.setString(2, entry.getSummary());
-                    statement.setString(3, entry.getDescription());
                     statement.executeUpdate();
                 } finally {
                     statement.close();
@@ -97,7 +93,7 @@ public class JdbcTodoListDAO implements TodoListDAO {
     }
 
     @Override
-    public List<TodoEntry> list() {
+    public List<String> list() {
         try {
             Connection connection = getConnection();
             try {
@@ -105,12 +101,11 @@ public class JdbcTodoListDAO implements TodoListDAO {
                 try {
                     ResultSet rset = statement.executeQuery("SELECT id, summary, description FROM todo_entries");
                     try {
-                        List<TodoEntry> list = new ArrayList<TodoEntry>();
+                        List<String> list = new ArrayList<String>();
                         while (rset.next()) {
                             Long id = rset.getLong(1);
                             String summary = rset.getString(2);
                             String description = rset.getString(3);
-                            list.add(new TodoEntry(id, summary, description));
                         }
                         return list;
                     } finally {

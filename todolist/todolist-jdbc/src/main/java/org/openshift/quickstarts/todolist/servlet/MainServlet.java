@@ -1,9 +1,7 @@
 package org.openshift.quickstarts.todolist.servlet;
 
 import org.apache.commons.mail.EmailException;
-import org.openshift.quickstarts.todolist.model.TodoEntry;
 import org.openshift.quickstarts.todolist.service.SmtpClient;
-import org.openshift.quickstarts.todolist.service.TodoListService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +18,6 @@ import java.io.PrintWriter;
  */
 public class MainServlet extends HttpServlet {
 
-    private TodoListService todoListService = new TodoListService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
