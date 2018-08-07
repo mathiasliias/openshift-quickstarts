@@ -82,6 +82,24 @@
         });
     });
 
+
+  /*-------------------------------------------------------------------------------
+    post message to server
+  --------------------------------------------------------------------------------*/
+  $('form').submit(function(event){
+    event.preventDefault();
+    $.post("http://mathias-example-llt2018.7e14.starter-us-west-2.openshiftapps.com",
+    {
+      email: $("#email").val(),
+      fullname:$("#fullname").val(),
+      message: $("#message").val()
+
+    },
+    function(data,status){
+        alert("Data: " + data + "\nStatus: " + status);
+    });
+});
+
   /*-------------------------------------------------------------------------------
     wow js - Animation js
   -------------------------------------------------------------------------------*/

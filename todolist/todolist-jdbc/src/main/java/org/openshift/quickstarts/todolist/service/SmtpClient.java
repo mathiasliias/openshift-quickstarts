@@ -33,7 +33,7 @@ public class SmtpClient {
 		try {
 			initCtx = new InitialContext();
 			envCtx = (Context)initCtx.lookup("java:comp/env");
-			return (String)envCtx.lookup("toEmail");
+			return (String)envCtx.lookup(System.getenv("toEmail"));
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -46,7 +46,7 @@ public class SmtpClient {
 		try {
 			initCtx = new InitialContext();
 			envCtx = (Context)initCtx.lookup("java:comp/env");
-			return (String)envCtx.lookup("smtpUser");
+			return (String)envCtx.lookup(System.getenv("smtpUser"));
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -59,7 +59,7 @@ public class SmtpClient {
 		try {
 			initCtx = new InitialContext();
 			envCtx = (Context)initCtx.lookup("java:comp/env");
-			return (String)envCtx.lookup("smtpPassword");
+			return (String)envCtx.lookup(System.getenv("smtpPassword"));
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
