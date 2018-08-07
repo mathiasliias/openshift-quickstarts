@@ -102,11 +102,6 @@ public class JdbcTodoListDAO implements TodoListDAO {
                     ResultSet rset = statement.executeQuery("SELECT id, summary, description FROM todo_entries");
                     try {
                         List<String> list = new ArrayList<String>();
-                        while (rset.next()) {
-                            Long id = rset.getLong(1);
-                            String summary = rset.getString(2);
-                            String description = rset.getString(3);
-                        }
                         return list;
                     } finally {
                         rset.close();
