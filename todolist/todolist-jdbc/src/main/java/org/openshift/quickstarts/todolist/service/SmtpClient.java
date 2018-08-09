@@ -17,6 +17,8 @@ public class SmtpClient {
 		HtmlEmail email = new HtmlEmail();
 		email.setAuthentication(smtpUser, smtpPassword);
 		email.setHostName("smtp.google.com");
+		email.setSmtpPort(465);
+		email.setSSLOnConnect(true);
 		email.addTo(toAddr);
 		email.setFrom(smtpUser);
 		email.setSubject("Lemmikloomatuba sõnum");
