@@ -12,7 +12,7 @@ public class SmtpClient {
 	public static void sendMessage(String fromEmail, String fullname, String message) throws EmailException {
 		HtmlEmail email = new HtmlEmail();
 		email.setAuthentication(smtpUser, smtpPassword);
-		email.setHostName("smtp.google.com");
+		email.setHostName("smtp.gmail.com");
 		email.setSmtpPort(465);
 		email.setSSLOnConnect(true);
 		email.addTo(toAddr);
