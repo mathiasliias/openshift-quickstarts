@@ -1,16 +1,12 @@
 package org.openshift.quickstarts.todolist.service;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 
 public class SmtpClient {
 	
 	public static final String toAddr = System.getenv("toEmail");
-	public static final String smtpUser = System.getenv("smtpPassword");
+	public static final String smtpUser = System.getenv("smtpUser");
 	public static final String smtpPassword = System.getenv("smtpPassword");
 	
 	public static void sendMessage(String fromEmail, String fullname, String message) throws EmailException {
@@ -26,6 +22,5 @@ public class SmtpClient {
 						"<p>" + fullname +"</p>" +
 						"<p>" + fromEmail +"</p>" + "</html>");
 		email.send();
-		
 	}
 }
