@@ -9,9 +9,9 @@ import org.apache.commons.mail.HtmlEmail;
 
 public class SmtpClient {
 	
-	public static final String toAddr = getToAddress();
-	public static final String smtpUser = getSmtpUser();
-	public static final String smtpPassword = getSmtpPassword();
+	public static final String toAddr = System.getenv("toEmail");
+	public static final String smtpUser = System.getenv("smtpPassword");
+	public static final String smtpPassword = System.getenv("smtpPassword");
 	
 	public static void sendMessage(String fromEmail, String fullname, String message) throws EmailException {
 		HtmlEmail email = new HtmlEmail();
@@ -25,44 +25,5 @@ public class SmtpClient {
 						"<p>" + fromEmail +"</p>" + "</html>");
 		email.send();
 		
-	}
-	
-	public static String getToAddress() {
-		Context initCtx; 
-		Context envCtx;
-		try {
-			initCtx = new InitialContext();
-			envCtx = (Context)initCtx.lookup("java:comp/env");
-			return (String)envCtx.lookup(System.getenv("toEmail"));
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
-	public static String getSmtpUser() {
-		Context initCtx; 
-		Context envCtx;
-		try {
-			initCtx = new InitialContext();
-			envCtx = (Context)initCtx.lookup("java:comp/env");
-			return (String)envCtx.lookup(System.getenv("smtpUser"));
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
-	public static String getSmtpPassword() {
-		Context initCtx; 
-		Context envCtx;
-		try {
-			initCtx = new InitialContext();
-			envCtx = (Context)initCtx.lookup("java:comp/env");
-			return (String)envCtx.lookup(System.getenv("smtpPassword"));
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-		return null;
 	}
 }
