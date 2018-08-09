@@ -11,16 +11,17 @@ public class SmtpClient {
 	
 	public static void sendMessage(String fromEmail, String fullname, String message) throws EmailException {
 		HtmlEmail email = new HtmlEmail();
+		email.setCharset("UTF-8");
 		email.setAuthentication(smtpUser, smtpPassword);
 		email.setHostName("smtp.gmail.com");
 		email.setSmtpPort(465);
 		email.setSSLOnConnect(true);
 		email.addTo(toAddr);
 		email.setFrom(smtpUser);
-		email.setSubject("Lemmikloomatuba sõnum");
+		email.setSubject("Lemmikloomatuba: " + fullname);
 		email.setHtmlMsg("<html><p>" + fromEmail +"</p>" +
 						"<p>" + fullname +"</p>" +
-						"<p>" + fromEmail +"</p>" + "</html>");
+						"<p>" + message +"</p>" + "</html>");
 		email.send();
 	}
 }
