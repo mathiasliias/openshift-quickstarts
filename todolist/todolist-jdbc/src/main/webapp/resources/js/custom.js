@@ -97,6 +97,9 @@
     },
     function(data, status){
       if (status === 'success') {
+        $("#email").val("");
+        $("#fullName").val("");
+        $("#message").val("");
         var modal = document.getElementById('myModal');
         modal.style.display = "block";
       }
